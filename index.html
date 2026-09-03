@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal da Revendedora Lua</title>
+<style>
+:root{--t:#159da0;--td:#087c80;--p:#8d60a5;--pl:#f0e6f4;--g:#d2aa46;--bg:#f7f8fa;--ink:#263238;--muted:#6c767b;--line:#e2e5e7;--card:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}a{text-decoration:none;color:inherit}.wrap{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;color:var(--td);font-weight:900}.moon{width:43px;height:43px;border:2px solid var(--t);border-radius:50%;display:grid;place-items:center;color:var(--p);font-size:24px}.brand small{display:block;color:#687277;font-size:9px;letter-spacing:1px}.links{display:flex;gap:20px;font-size:14px;font-weight:700}.links a:hover{color:var(--t)}.btn{border:0;border-radius:11px;padding:12px 17px;font-weight:800;display:inline-flex;justify-content:center;align-items:center;cursor:pointer}.primary{background:var(--t);color:white}.secondary{background:white;color:var(--p);border:1px solid #d8cbe0}
+.hero{padding:64px 0;background:linear-gradient(135deg,#fff,#f5f0f7)}.heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}.eyebrow{color:var(--t);font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase}h1{font:600 clamp(44px,7vw,75px)/.95 Georgia,serif;color:var(--td);margin:14px 0}h1 i{display:block;color:var(--p);font-size:.62em;margin-top:14px}.hero p{font-size:18px;color:var(--muted);max-width:650px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.heroCard{background:#fff;border:1px solid var(--line);padding:28px;border-radius:25px;box-shadow:0 14px 35px #26323812}.circle{width:235px;height:235px;margin:auto;border-radius:50%;background:var(--t);display:grid;place-items:center;text-align:center;color:white}.circle strong{font:700 31px Georgia,serif}.login{margin-top:20px;padding:18px;border:1px solid var(--line);border-radius:15px}.field{display:grid;gap:6px;margin:0 0 13px}.field label{font-size:12px;font-weight:800;color:#68747a}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid #d6dcdf;border-radius:9px;background:#fff;outline:none}.field textarea{min-height:90px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--t)}section{padding:65px 0}.alt{background:#fff}.head{margin-bottom:28px}.head h2{font:600 37px Georgia,serif;color:var(--td);margin:0}.head p{color:var(--muted)}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 6px 18px #26323808}.icon{width:44px;height:44px;border-radius:12px;background:var(--pl);color:var(--p);display:grid;place-items:center;font-size:21px}.card h3{margin:11px 0 7px}.muted{color:var(--muted)}.tag{display:inline-block;padding:4px 9px;background:var(--pl);color:var(--p);border-radius:20px;font-size:11px;font-weight:800}.price{font-size:23px;font-weight:900;color:var(--td);margin:12px 0}.card li{margin:7px 0}.table{overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fff}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--line)}th{color:var(--td);background:#f1fbfb;font-size:13px}.calc{display:grid;grid-template-columns:1fr 1fr;gap:20px}.result{background:var(--td);color:white;border-radius:15px;padding:20px;margin-top:16px}.result b{font-size:40px;display:block;margin:5px 0}.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.tier{text-align:center;border:1px solid var(--line);background:#fff;border-radius:16px;padding:20px}.tier div{font-size:32px}.tier strong{display:block;color:var(--p)}.notice{padding:13px;background:#e9f7f7;color:#176b6e;border-radius:10px;font-weight:700;font-size:13px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.checks label{display:block;margin:9px 0}.admin{background:#202c31;color:white}.admin h2{color:white}.adminGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.admin .card{color:var(--ink)}.small{font-size:12px}.status{padding:10px;border-radius:8px;background:#eef6f6;color:var(--td);margin-top:10px}.toast{position:fixed;right:18px;bottom:18px;background:#263238;color:white;padding:14px 18px;border-radius:10px;transform:translateY(130px);transition:.2s;z-index:50}.toast.on{transform:none}footer{background:var(--td);color:#fff;padding:35px 0}
+@media(max-width:850px){.links{display:none}.heroGrid,.calc,.two,.adminGrid{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.grid4,.tiers{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.grid4,.tiers{grid-template-columns:1fr}.hero{padding:45px 0}section{padding:50px 0}}
+</style>
+</head>
+<body>
+<header><nav class="wrap">
+<a class="brand" href="#inicio"><span class="moon">☾</span><span>LUÁ<small>FOLHEADOS & ACESSÓRIOS</small></span></a>
+<div class="links"><a href="#kits">Kits</a><a href="#comissao">Comissão</a><a href="#vendas">Vendas</a><a href="#cadastro">Cadastro</a><a href="#admin">Admin</a></div>
+<a class="btn primary" href="#acesso">Área da revendedora</a>
+</nav></header>
+
+<section class="hero" id="inicio"><div class="wrap heroGrid">
+<div><div class="eyebrow">Programa de Revendedoras</div><h1>Seja uma<br>Revendedora <i>Lua</i></h1>
+<p>Transforme acessórios em oportunidades. Acesse seu catálogo, acompanhe suas vendas, comissão e cadastro em um só lugar.</p>
+<div class="actions"><a class="btn primary" href="#acesso">Entrar na área</a><a class="btn secondary" href="#cadastro">Quero ser revendedora</a></div></div>
+<div class="heroCard" id="acesso"><div class="circle"><div><strong>Lembranças<br>da Lua</strong><br><em>Ateliê</em></div></div>
+<div class="login"><h3>Área da Revendedora</h3><div class="field"><label>CPF ou e-mail</label><input id="loginUser" placeholder="Digite seu CPF ou e-mail"></div><div class="field"><label>Senha</label><input id="loginPass" type="password" placeholder="Digite sua senha"></div><button class="btn primary" style="width:100%" onclick="login()">Entrar</button><div id="loginStatus"></div></div></div>
+</div></section>
+
+<section><div class="wrap"><div class="head"><h2>Objetivo do programa</h2><p>Criar uma rede de revendedoras parceiras para comercialização de folheados e acessórios, com duas modalidades de trabalho.</p></div>
+<div class="grid3"><article class="card"><div class="icon">🛒</div><h3>Kit Compra</h3><p class="muted">A revendedora compra o kit antecipadamente e fica com os produtos para vender, definindo sua estratégia e margem de lucro.</p></article>
+<article class="card"><div class="icon">🤝</div><h3>Kit Consignado</h3><p class="muted">Recebe os produtos sem pagar antecipadamente. Depois do período, presta contas das peças vendidas e devolve as não vendidas.</p></article>
+<article class="card"><div class="icon">✦</div><h3>Parceria Lua</h3><p class="muted">Produtos, catálogo digital, materiais de divulgação, suporte, novidades e possibilidades de incentivo por vendas.</p></article></div></div></section>
+
+<section class="alt" id="kits"><div class="wrap"><div class="head"><h2>Sugestão de categorias de kits</h2><p>Escolha conforme sua experiência e volume de vendas.</p></div><div class="grid3">
+<article class="card"><span class="tag">Para quem está começando</span><h3>Kit Lua Inicial</h3><div class="price">10 a 15 peças</div><ul><li>Mix de brincos, colares, pulseiras e acessórios</li><li>Catálogo digital</li><li>Tabela de preços</li><li>Material para divulgação</li></ul></article>
+<article class="card"><span class="tag">Para quem já possui clientes</span><h3>Kit Lua Intermediário</h3><div class="price">20 a 30 peças</div><ul><li>Mix mais diversificado</li><li>Catálogo digital</li><li>Material de divulgação</li><li>Condições especiais para reposição</li></ul></article>
+<article class="card"><span class="tag">Maior volume de vendas</span><h3>Kit Lua Premium</h3><div class="price">40+ peças</div><ul><li>Mix completo</li><li>Novidades e lançamentos</li><li>Condições diferenciadas</li><li>Atendimento prioritário</li></ul></article></div></div></section>
+
+<section id="comissao"><div class="wrap"><div class="head"><h2>Sistema de comissão</h2><p>Use a calculadora para simular a comissão conforme o total vendido no período.</p></div><div class="calc"><div class="table"><table><tr><th>Total vendido no período</th><th>Comissão</th></tr><tr><td>Até R$ 299</td><td>20%</td></tr><tr><td>R$ 300 a R$ 499</td><td>25%</td></tr><tr><td>R$ 500 a R$ 799</td><td>30%</td></tr><tr><td>Acima de R$ 800</td><td>35%</td></tr></table></div><div class="card"><h3>Simulador</h3><div class="field"><label>Total vendido</label><input id="saleTotal" type="number" min="0" step=".01" placeholder="Ex.: 750"></div><button class="btn primary" onclick="calc()">Calcular</button><div class="result"><span>Comissão estimada</span><b id="commission">R$ 0,00</b><span id="rate">Informe o total vendido.</span></div></div></div></div></section>
+
+<section class="alt" id="vendas"><div class="wrap"><div class="head"><h2>Área de vendas</h2><p>Registre suas vendas para manter seu controle organizado.</p></div><div class="two"><div class="card"><h3>Registrar venda</h3><div class="field"><label>Cliente</label><input id="client" placeholder="Nome da cliente"></div><div class="field"><label>Produto / peça</label><input id="product" placeholder="Ex.: Colar Lua"></div><div class="field"><label>Valor</label><input id="saleValue" type="number" step=".01" placeholder="0,00"></div><button class="btn primary" onclick="addSale()">Registrar venda</button></div>
+<div class="card"><h3>Resumo deste dispositivo</h3><div class="notice">Os registros desta demonstração ficam salvos neste navegador.</div><p>Total de vendas: <b id="count">0</b></p><p>Valor vendido: <b id="sum">R$ 0,00</b></p><div id="saleList" class="small"></div></div></div></div></section>
+
+<section><div class="wrap"><div class="head"><h2>Benefícios para a revendedora</h2><p>Estrutura para divulgar, vender e acompanhar sua evolução.</p></div><div class="grid4">
+<div class="card"><div class="icon">📦</div><h3>Produtos para vender</h3><p class="muted">Kits e mix de produtos.</p></div><div class="card"><div class="icon">📱</div><h3>Catálogo digital</h3><p class="muted">Fotos e materiais para divulgação.</p></div><div class="card"><div class="icon">💡</div><h3>Suporte da Lua</h3><p class="muted">Novidades e lançamentos.</p></div><div class="card"><div class="icon">💰</div><h3>Renda extra</h3><p class="muted">Possibilidade de aumentar sua renda.</p></div></div></div></section>
+
+<section class="alt"><div class="wrap"><div class="head"><h2>Clube das Revendedoras Lua</h2><p>Programa de incentivo por vendas mensais.</p></div><div class="tiers"><div class="tier">🥉<strong>Lua Bronze</strong><span>Até R$ 500/mês</span></div><div class="tier">🥈<strong>Lua Prata</strong><span>R$ 501 a R$ 1.000/mês</span></div><div class="tier">🥇<strong>Lua Ouro</strong><span>R$ 1.001 a R$ 2.000/mês</span></div><div class="tier">💎<strong>Lua Diamante</strong><span>Acima de R$ 2.000/mês</span></div></div></div></section>
+
+<section id="cadastro"><div class="wrap"><div class="head"><h2>Formulário de cadastro</h2><p>Preencha seus dados e envie. As respostas serão encaminhadas para o e-mail da Lua.</p></div>
+<div class="card"><div class="grid3"><div class="field"><label>Nome completo *</label><input id="name"></div><div class="field"><label>Contato *</label><input id="phone"></div><div class="field"><label>E-mail *</label><input id="email" type="email"></div><div class="field"><label>Cidade / Bairro</label><input id="city"></div><div class="field"><label>Instagram</label><input id="instagram"></div><div class="field"><label>Como pretende vender?</label><select id="channel"><option>WhatsApp</option><option>Instagram</option><option>Presencial</option><option>Todos os canais</option></select></div></div>
+<div class="field"><label>Modalidade de interesse</label><select id="mode"><option>Kit Compra</option><option>Kit Consignado</option><option>Tenho interesse nas duas modalidades</option></select></div>
+<div class="field"><label>Mensagem / observações</label><textarea id="notes" placeholder="Conte um pouco sobre você ou deixe uma observação."></textarea></div>
+<button class="btn primary" onclick="submitForm()">Enviar cadastro</button><div id="formStatus"></div></div></div></section>
+
+<section class="admin" id="admin"><div class="wrap"><div class="head"><h2>Painel de edição e respostas</h2><p style="color:#d5dfe2">Esta área permite editar informações e visualizar/exportar os cadastros salvos neste navegador.</p></div>
+<div class="adminGrid"><div class="card"><h3>Editar dados do site</h3><div class="field"><label>Nome da marca</label><input id="editBrand"></div><div class="field"><label>Frase principal</label><input id="editTagline"></div><div class="field"><label>WhatsApp para atendimento</label><input id="editWhats"></div><button class="btn primary" onclick="saveSettings()">Salvar alterações</button><div id="settingsStatus"></div></div>
+<div class="card"><h3>Respostas recebidas</h3><p class="small">Cadastros feitos neste navegador aparecem abaixo. Para receber de outras pessoas, configure o Google Apps Script incluído no pacote.</p><div id="responses"></div><button class="btn secondary" onclick="exportCSV()">Exportar respostas CSV</button> <button class="btn secondary" onclick="clearResponses()">Limpar respostas</button></div></div></div></section>
+</main><footer><div class="wrap"><b id="footerBrand">LUÁ — FOLHEADOS & ACESSÓRIOS</b><p>Programa de Revendedoras • <span id="footerTag">Transforme acessórios em oportunidades!</span></p></div></footer>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='lua_portal_v2', SKEY='lua_settings_v2';
+const LUA_EMAIL='lembrancasdaluapersonalizados@gmail.com';
+const money=n=>Number(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('on');setTimeout(()=>x.classList.remove('on'),2500)}
+function calc(){let v=+document.getElementById('saleTotal').value||0,p=v>=800?35:v>=500?30:v>=300?25:20;document.getElementById('commission').textContent=money(v*p/100);document.getElementById('rate').textContent=p+'% sobre '+money(v)}
+function getSales(){return JSON.parse(localStorage.getItem(KEY)||'[]')}
+function addSale(){let c=client.value.trim(),pr=product.value.trim(),v=+saleValue.value||0;if(!c||!pr||v<=0)return toast('Preencha cliente, produto e valor.');let a=getSales();a.push({data:new Date().toLocaleString('pt-BR'),cliente:c,produto:pr,valor:v});localStorage.setItem(KEY,JSON.stringify(a));client.value=product.value=saleValue.value='';renderSales();toast('Venda registrada.')}
+function renderSales(){let a=getSales(),s=a.reduce((x,y)=>x+y.valor,0);count.textContent=a.length;sum.textContent=money(s);saleList.innerHTML=a.slice(-5).reverse().map(x=>`<div style="padding:8px 0;border-bottom:1px solid #eee">${x.cliente} • ${x.produto} • <b>${money(x.valor)}</b><br>${x.data}</div>`).join('')||'<p class="muted">Nenhuma venda registrada.</p>'}
+function getResponses(){return JSON.parse(localStorage.getItem('lua_responses_v2')||'[]')}
+async function submitForm(){
+ let data={
+   nome:name.value.trim(), contato:phone.value.trim(), email:email.value.trim(),
+   cidade:city.value.trim(), instagram:instagram.value.trim(), canal:channel.value,
+   modalidade:mode.value, observacoes:notes.value.trim(),
+   data:new Date().toLocaleString('pt-BR')
+ };
+ if(!data.nome||!data.contato||!data.email)return toast('Preencha nome, contato e e-mail.');
+ let a=getResponses(); a.push(data); localStorage.setItem('lua_responses_v2',JSON.stringify(a)); renderResponses();
+ const body=new URLSearchParams({
+   _subject:'Novo cadastro — Programa de Revendedoras Lua',
+   _template:'table',
+   _captcha:'true',
+   _replyto:data.email,
+   Nome:data.nome, Contato:data.contato, Email:data.email,
+   'Cidade/Bairro':data.cidade, Instagram:data.instagram,
+   'Como pretende vender':data.canal, Modalidade:data.modalidade,
+   Observações:data.observacoes, Data:data.data
+ });
+ try{
+   const r=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(LUA_EMAIL),{
+     method:'POST',
+     headers:{'Content-Type':'application/x-www-form-urlencoded','Accept':'application/json'},
+     body:body.toString()
+   });
+   const ok=r.ok;
+   formStatus.innerHTML='<div class="status">'+(ok?'Cadastro enviado para o e-mail da Lua com sucesso.':'Cadastro salvo localmente. Verifique a configuração do formulário.')+'</div>';
+   toast(ok?'Cadastro enviado!':'Cadastro salvo localmente.');
+ }catch(e){
+   formStatus.innerHTML='<div class="status">Cadastro salvo neste navegador. Não foi possível enviar ao e-mail agora.</div>';
+   toast('Cadastro salvo localmente.');
+ }
+ ['name','phone','email','city','instagram','notes'].forEach(id=>document.getElementById(id).value='');
+}
+function renderResponses(){let a=getResponses();responses.innerHTML=a.length?a.map((x,i)=>`<div style="border:1px solid #eee;border-radius:9px;padding:10px;margin:7px 0"><b>${i+1}. ${x.nome}</b><br>${x.contato} • ${x.email}<br>${x.modalidade} • ${x.canal}<br><span class="small">${x.data}</span></div>`).join(''):'<p class="muted">Nenhum cadastro recebido.</p>'}
+function exportCSV(){let a=getResponses();if(!a.length)return toast('Não há respostas para exportar.');let h=['data','nome','contato','email','cidade','instagram','canal','modalidade','observacoes'];let csv=[h.join(';'),...a.map(x=>h.map(k=>`"${String(x[k]??'').replaceAll('"','""')}"`).join(';'))].join('\\n');let b=new Blob(['\\ufeff'+csv],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(b),l=document.createElement('a');l.href=u;l.download='cadastros_revendedoras_lua.csv';l.click();URL.revokeObjectURL(u)}
+function clearResponses(){if(confirm('Apagar todas as respostas salvas neste navegador?')){localStorage.removeItem('lua_responses_v2');renderResponses();toast('Respostas removidas.')}}
+function saveSettings(){let s={brand:editBrand.value.trim()||'LUÁ — FOLHEADOS & ACESSÓRIOS',tag:editTagline.value.trim()||'Transforme acessórios em oportunidades!',whats:editWhats.value.trim()};localStorage.setItem(SKEY,JSON.stringify(s));applySettings();toast('Alterações salvas neste navegador.')}
+function applySettings(){let s=JSON.parse(localStorage.getItem(SKEY)||'{}');editBrand.value=s.brand||'LUÁ — FOLHEADOS & ACESSÓRIOS';editTagline.value=s.tag||'Transforme acessórios em oportunidades!';editWhats.value=s.whats||'';footerBrand.textContent=s.brand||'LUÁ — FOLHEADOS & ACESSÓRIOS';footerTag.textContent=s.tag||'Transforme acessórios em oportunidades!'}
+function login(){if(loginUser.value&&loginPass.value){loginStatus.innerHTML='<div class="status">Acesso demonstrativo liberado. Para login real, conecte um backend.</div>'}else toast('Informe CPF/e-mail e senha.')}
+renderSales();renderResponses();applySettings();
+</script>
+</body></html>
