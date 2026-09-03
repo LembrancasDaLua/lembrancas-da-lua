@@ -54,7 +54,7 @@ header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid 
 
 <section class="admin" id="admin"><div class="wrap"><div class="head"><h2>Painel de edição e respostas</h2><p style="color:#d5dfe2">Esta área permite editar informações e visualizar/exportar os cadastros salvos neste navegador.</p></div>
 <div class="adminGrid"><div class="card"><h3>Editar dados do site</h3><div class="field"><label>Nome da marca</label><input id="editBrand"></div><div class="field"><label>Frase principal</label><input id="editTagline"></div><div class="field"><label>WhatsApp para atendimento</label><input id="editWhats"></div><button class="btn primary" onclick="saveSettings()">Salvar alterações</button><div id="settingsStatus"></div></div>
-<div class="card"><h3>Respostas recebidas</h3><p class="small">Cadastros feitos neste navegador aparecem abaixo. Para receber de outras pessoas, configure o Google Apps Script incluído no pacote.</p><div id="responses"></div><button class="btn secondary" onclick="exportCSV()">Exportar respostas CSV</button> <button class="btn secondary" onclick="clearResponses()">Limpar respostas</button></div></div></div></section>
+<div class="card"><h3>Respostas recebidas</h3><p class="small">Os cadastros feitos neste navegador aparecem abaixo. O formulário também encaminha novas respostas por e-mail.</p><div id="responses"></div><button class="btn secondary" onclick="exportCSV()">Exportar respostas CSV</button> <button class="btn secondary" onclick="clearResponses()">Limpar respostas</button></div></div></div></section>
 </main><footer><div class="wrap"><b id="footerBrand">LUÁ — FOLHEADOS & ACESSÓRIOS</b><p>Programa de Revendedoras • <span id="footerTag">Transforme acessórios em oportunidades!</span></p></div></footer>
 <div class="toast" id="toast"></div>
 <script>
@@ -68,38 +68,13 @@ function addSale(){let c=client.value.trim(),pr=product.value.trim(),v=+saleValu
 function renderSales(){let a=getSales(),s=a.reduce((x,y)=>x+y.valor,0);count.textContent=a.length;sum.textContent=money(s);saleList.innerHTML=a.slice(-5).reverse().map(x=>`<div style="padding:8px 0;border-bottom:1px solid #eee">${x.cliente} • ${x.produto} • <b>${money(x.valor)}</b><br>${x.data}</div>`).join('')||'<p class="muted">Nenhuma venda registrada.</p>'}
 function getResponses(){return JSON.parse(localStorage.getItem('lua_responses_v2')||'[]')}
 async function submitForm(){
- let data={
-   nome:name.value.trim(), contato:phone.value.trim(), email:email.value.trim(),
-   cidade:city.value.trim(), instagram:instagram.value.trim(), canal:channel.value,
-   modalidade:mode.value, observacoes:notes.value.trim(),
-   data:new Date().toLocaleString('pt-BR')
- };
+ let data={nome:name.value.trim(),contato:phone.value.trim(),email:email.value.trim(),cidade:city.value.trim(),instagram:instagram.value.trim(),canal:channel.value,modalidade:mode.value,observacoes:notes.value.trim(),data:new Date().toLocaleString('pt-BR')};
  if(!data.nome||!data.contato||!data.email)return toast('Preencha nome, contato e e-mail.');
- let a=getResponses(); a.push(data); localStorage.setItem('lua_responses_v2',JSON.stringify(a)); renderResponses();
- const body=new URLSearchParams({
-   _subject:'Novo cadastro — Programa de Revendedoras Lua',
-   _template:'table',
-   _captcha:'true',
-   _replyto:data.email,
-   Nome:data.nome, Contato:data.contato, Email:data.email,
-   'Cidade/Bairro':data.cidade, Instagram:data.instagram,
-   'Como pretende vender':data.canal, Modalidade:data.modalidade,
-   Observações:data.observacoes, Data:data.data
- });
- try{
-   const r=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(LUA_EMAIL),{
-     method:'POST',
-     headers:{'Content-Type':'application/x-www-form-urlencoded','Accept':'application/json'},
-     body:body.toString()
-   });
-   const ok=r.ok;
-   formStatus.innerHTML='<div class="status">'+(ok?'Cadastro enviado para o e-mail da Lua com sucesso.':'Cadastro salvo localmente. Verifique a configuração do formulário.')+'</div>';
-   toast(ok?'Cadastro enviado!':'Cadastro salvo localmente.');
- }catch(e){
-   formStatus.innerHTML='<div class="status">Cadastro salvo neste navegador. Não foi possível enviar ao e-mail agora.</div>';
-   toast('Cadastro salvo localmente.');
- }
- ['name','phone','email','city','instagram','notes'].forEach(id=>document.getElementById(id).value='');
+ let a=getResponses();a.push(data);localStorage.setItem('lua_responses_v2',JSON.stringify(a));renderResponses();
+ const form=document.createElement('form');form.method='POST';form.action='https://formsubmit.co/'+encodeURIComponent(LUA_EMAIL);form.style.display='none';
+ const fields={_subject:'Novo cadastro — Programa de Revendedoras Lua',_template:'table',_captcha:'true',_replyto:data.email,_next:'https://lembrancasdalua.github.io/lembrancas-da-lua/#cadastro',Nome:data.nome,Contato:data.contato,Email:data.email,'Cidade/Bairro':data.cidade,Instagram:data.instagram,'Como pretende vender':data.canal,Modalidade:data.modalidade,Observações:data.observacoes,Data:data.data};
+ Object.keys(fields).forEach(k=>{const i=document.createElement('input');i.type='hidden';i.name=k;i.value=fields[k];form.appendChild(i)});
+ document.body.appendChild(form);formStatus.innerHTML='<div class="status">Enviando cadastro…</div>';toast('Enviando cadastro…');form.submit();
 }
 function renderResponses(){let a=getResponses();responses.innerHTML=a.length?a.map((x,i)=>`<div style="border:1px solid #eee;border-radius:9px;padding:10px;margin:7px 0"><b>${i+1}. ${x.nome}</b><br>${x.contato} • ${x.email}<br>${x.modalidade} • ${x.canal}<br><span class="small">${x.data}</span></div>`).join(''):'<p class="muted">Nenhum cadastro recebido.</p>'}
 function exportCSV(){let a=getResponses();if(!a.length)return toast('Não há respostas para exportar.');let h=['data','nome','contato','email','cidade','instagram','canal','modalidade','observacoes'];let csv=[h.join(';'),...a.map(x=>h.map(k=>`"${String(x[k]??'').replaceAll('"','""')}"`).join(';'))].join('\\n');let b=new Blob(['\\ufeff'+csv],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(b),l=document.createElement('a');l.href=u;l.download='cadastros_revendedoras_lua.csv';l.click();URL.revokeObjectURL(u)}
